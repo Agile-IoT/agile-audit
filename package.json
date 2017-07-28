@@ -1,0 +1,35 @@
+{
+  "name": "agile-audit",
+  "version": "0.0.1",
+  "description": "module logging access to actuations and sensor data Edit",
+  "main": "index.js",
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-jsbeautifier": "^0.2.13",
+    "mocha": "2.4.5",
+    "deep-diff": "0.3.3",
+    "rmdir": "^1.2.0"
+  },
+  "scripts": {
+    "test": "mocha tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nopbyte/agile-audit.git"
+  },
+  "author": "nopbyte",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nopbyte/agile-audit/issues"
+  },
+  "homepage": "https://github.com/nopbyte/agile-audit#readme",
+  "dependencies": {
+    "http-errors": "^1.6.1",
+    "level": "^1.7.0",
+    "leveldown": "^1.7.2",
+    "levelup": "^1.3.9",
+    "timeframe-to-seconds": "0.0.4"
+  }
+}
