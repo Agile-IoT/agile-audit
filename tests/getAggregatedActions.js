@@ -97,13 +97,6 @@ describe('AgileAudit', function () {
             console.log("expected actions: " + JSON.stringify(result));
             console.log("got actions: " + JSON.stringify(actions));
           }
-          /*var owned = actions.reduce((sum, v) => {
-            return sum && v.entity.id === '3' && v.entity.type === '/sensor';
-          }, true);
-          if (actions.length === 2 && owned) {
-            done();
-
-          }*/
 
         }).catch((err) => {
           throw err;

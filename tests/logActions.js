@@ -73,6 +73,38 @@ describe('AgileAudit', function () {
           throw err;
         });
     });
+
+    it('should only log actions matching regex if provided during configuration', function (done) {
+      var conf2 = Object.assign({}, conf);
+      conf2.regex = '^actions';
+      audit = new Audit(conf2);
+
+      var user2 = {
+        id: 'bob!@!agile-local',
+        client_id: 'someClient2'
+      };
+      Promise.all([
+          audit.log(1, user, entity, 'actions.read'),
+          audit.log(1, user2, entity, 'actions.read'),
+          audit.log(1, user, entity, 'write'),
+          audit.log(1, user2, entity, 'read'),
+          audit.log(1, user2, entity, 'write'),
+        ])
+        .then(() => {
+          return audit.getActions();
+        }).then((actions) => {
+          var owned = actions.reduce((sum, v) => {
+            return sum && v.action.indexOf('actions') === 0;
+          }, true);
+          if (owned && actions.length === 2) {
+            done();
+          }
+
+        }).catch((err) => {
+          throw err;
+        });
+    });
+
   });
 
 });
