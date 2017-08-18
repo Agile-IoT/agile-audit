@@ -3,17 +3,7 @@
 var deepdif = require('deep-diff');
 var rmdir = require('rmdir');
 var Audit = require('../lib/audit');
-
-var conf = {
-  dbName: './leveldb',
-  defaults: {
-    //according to https://www.npmjs.com/package/timeframe-to-seconds,
-    timeframe: '1d',
-    //DETAILED=0, ONLY_IMPORTANT_STUFF=1
-    level: 1
-  }
-
-};
+var conf = require('./default-conf');
 
 var user = {
   id: 'agile!@!agile-local',

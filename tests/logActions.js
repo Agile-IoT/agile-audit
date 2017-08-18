@@ -3,17 +3,7 @@
 var deepdif = require('deep-diff');
 var rmdir = require('rmdir');
 var Audit = require('../lib/audit');
-
-var conf = {
-  dbName: './leveldb',
-  defaults: {
-    //according to https://www.npmjs.com/package/timeframe-to-seconds,
-    timeframe: '1d',
-    //DETAILED=0, ONLY_IMPORTANT_STUFF=1
-    level: 1
-  }
-
-};
+var conf = require('./default-conf');
 
 var user = {
   id: 'agile!@!agile-local',
@@ -75,8 +65,15 @@ describe('AgileAudit', function () {
     });
 
     it('should only log actions matching regex if provided during configuration', function (done) {
-      var conf2 = Object.assign({}, conf);
-      conf2.regex = '^actions';
+      var conf2 = {
+        dbName: './leveldb',
+        //according to https://www.npmjs.com/package/timeframe-to-seconds,
+        timeframe: '1d',
+        //DETAILED=0, ONLY_IMPORTANT_STUFF=1
+        level: 1,
+        regex: '^actions'
+        //regex in case we want to log only certain
+      };
       audit = new Audit(conf2);
 
       var user2 = {
@@ -93,10 +90,11 @@ describe('AgileAudit', function () {
         .then(() => {
           return audit.getActions();
         }).then((actions) => {
-          var owned = actions.reduce((sum, v) => {
+
+          var actionsStart = actions.reduce((sum, v) => {
             return sum && v.action.indexOf('actions') === 0;
           }, true);
-          if (owned && actions.length === 2) {
+          if (actionsStart && actions.length === 2) {
             done();
           }
 
