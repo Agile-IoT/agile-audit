@@ -2,7 +2,7 @@
   "name": "agile-audit",
   "version": "0.0.1",
   "description": "module logging access to actuations and sensor data Edit",
-  "main": "index.js",
+  "main": "lib/audit.js",
   "devDependencies": {
     "chai": "^4.1.0",
     "grunt": "^1.0.1",
